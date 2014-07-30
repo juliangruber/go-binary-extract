@@ -48,6 +48,10 @@ func TestExtract(t *testing.T) {
 	value, err = Extract([]byte("{\"foo\":\"bar\\\"baz\"}"), "foo")
 	check(t, err)
 	assert.Equal(t, value, "bar\"baz")
+
+	value, err = Extract([]byte("{\"_a\":0,\"a_\":1,\"_a_\":2,\"a\":3}"), "a")
+	check(t, err)
+	assert.Equal(t, value, float64(3))
 }
 
 func check(t *testing.T, err error) {
