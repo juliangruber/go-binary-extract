@@ -58,6 +58,11 @@ func TestExtract(t *testing.T) {
 	if err == nil {
 		t.Error(errors.New("missing error"))
 	}
+
+	value, err = Extract([]byte("{\"foo\":\"bar\"}"), "bar")
+	if err == nil {
+		t.Error(errors.New("missing error"))
+	}
 }
 
 func check(t *testing.T, err error) {
