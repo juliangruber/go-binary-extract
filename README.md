@@ -3,6 +3,8 @@
 
   Extract a value from a json blob without parsing the whole thing.
 
+  This is a go port of the initial [node.js implementation](https://github.com/segmentio/binary-extract).
+
   Read the [docs](http://godoc.org/github.com/juliangruber/go-binary-extract).
 
 ## Installation
