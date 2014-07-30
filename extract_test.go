@@ -63,6 +63,14 @@ func TestExtract(t *testing.T) {
 	if err == nil {
 		t.Error(errors.New("missing error"))
 	}
+
+	value, err = Extract([]byte("{\"foo\":{\"bar\":{\"baz\":\"beep\"}}}"), "foo")
+	check(t, err)
+	assert.Equal(t, value, map[string]interface{}{
+		"bar": map[string]interface{}{
+			"baz": "beep",
+		},
+	})
 }
 
 func check(t *testing.T, err error) {
