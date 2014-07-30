@@ -36,6 +36,10 @@ func TestExtract(t *testing.T) {
 	assert.Equal(t, value, map[string]interface{}{
 		"bar": "baz",
 	})
+
+	value, err = Extract([]byte("{\"foo\":[\"bar\",\"baz\"]}"), "foo")
+	check(t, err)
+	assert.Equal(t, value, []interface{}{"bar", "baz"})
 }
 
 func check(t *testing.T, err error) {
