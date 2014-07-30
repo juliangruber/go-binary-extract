@@ -7,10 +7,17 @@ import (
 )
 
 func TestExtract(t *testing.T) {
-	buf := []byte("{\"foo\":\"bar\"}")
-	value, err := Extract(buf, "foo")
+	value, err := Extract([]byte("{\"foo\":\"bar\"}"), "foo")
+	check(t, err)
+	assert.Equal(t, value, "bar")
+
+	value, err = Extract([]byte("{\"foo\":\"bar\",\"bar\":\"baz\"}"), "foo")
+	check(t, err)
+	assert.Equal(t, value, "bar")
+}
+
+func check(t *testing.T, err error) {
 	if err != nil {
 		t.Error(err)
 	}
-	assert.Equal(t, value, "bar")
 }
