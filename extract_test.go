@@ -1,6 +1,7 @@
 package extract
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/bmizerany/assert"
@@ -52,6 +53,11 @@ func TestExtract(t *testing.T) {
 	value, err = Extract([]byte("{\"_a\":0,\"a_\":1,\"_a_\":2,\"a\":3}"), "a")
 	check(t, err)
 	assert.Equal(t, value, float64(3))
+
+	value, err = Extract([]byte("{\"foo\""), "foo")
+	if err == nil {
+		t.Error(errors.New("missing error"))
+	}
 }
 
 func check(t *testing.T, err error) {

@@ -64,7 +64,7 @@ func Extract(buf []byte, key string) (interface{}, error) {
 }
 
 func isMatch(buf []byte, i int, chars []byte) bool {
-	if i > 0 && buf[i-1] != mark {
+	if i > 0 && buf[i-1] != mark || len(buf) < i+len(chars) {
 		return false
 	}
 	for j := 0; j < len(chars); j++ {
@@ -79,6 +79,10 @@ func isMatch(buf []byte, i int, chars []byte) bool {
 }
 
 func findEnd(buf []byte, start int) (int, error) {
+	if len(buf) <= start {
+		return -1, errors.New("json too short")
+	}
+
 	level := 0
 	s := buf[start]
 
