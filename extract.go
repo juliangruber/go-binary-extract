@@ -56,7 +56,7 @@ func Extract(buf []byte, key string) (interface{}, error) {
 			if err != nil {
 				return nil, err
 			}
-			return parse(buf, start, end)
+			return parse(buf[start:end])
 		}
 	}
 
@@ -109,8 +109,7 @@ func findEnd(buf []byte, start int) (int, error) {
 	return -1, errors.New("missing end")
 }
 
-func parse(buf []byte, start int, end int) (interface{}, error) {
-	slice := buf[start:end]
+func parse(slice []byte) (interface{}, error) {
 	var ret interface{}
 	err := json.Unmarshal(slice, &ret)
 	return ret, err
